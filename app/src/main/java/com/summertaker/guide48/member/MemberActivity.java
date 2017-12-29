@@ -24,6 +24,7 @@ import com.summertaker.guide48.R;
 import com.summertaker.guide48.common.BaseActivity;
 import com.summertaker.guide48.common.BaseApplication;
 import com.summertaker.guide48.common.Config;
+import com.summertaker.guide48.common.ImageViewerActivity;
 import com.summertaker.guide48.common.WebDataAdapter;
 import com.summertaker.guide48.data.Member;
 import com.summertaker.guide48.data.WebData;
@@ -69,6 +70,12 @@ public class MemberActivity extends BaseActivity {
         loadYahoo();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void loadYahoo() {
         String query = mMember.getGroup() + " " + mMember.getName().replace(" ", "");
         try {
@@ -84,12 +91,12 @@ public class MemberActivity extends BaseActivity {
     }
 
     private void requestData(final String url, final String userAgent) {
-        Log.e(mTag, "url: " + url);
+        //Log.e(mTag, "url: " + url);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e(mTag, "response:\n" + response);
+                //Log.e(mTag, "response:\n" + response);
                 parseYahoo(url, response);
             }
         }, new Response.ErrorListener() {
@@ -137,11 +144,15 @@ public class MemberActivity extends BaseActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     WebData webData = (WebData) parent.getItemAtPosition(position);
-                    //goWebSite(webData.getUrl());
 
+                    String title = webData.getTitle();
+                    String picture = webData.getPicture();
                     String url = webData.getUrl();
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    //Intent intent = new Intent(MemberActivity.this, ImageViewerActivity.class);
+                    //intent.putExtra("title", title);
+                    //intent.putExtra("url", picture);
                     startActivity(intent);
                 }
             });

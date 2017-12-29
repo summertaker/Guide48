@@ -34,4 +34,5 @@
     <string name="title_activity_team">TeamActivity</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_member">MemberActivity</string>
+    <string name="title_activity_image_viewer">ImageViewerActivity</string>
 </resources>
