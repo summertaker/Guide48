@@ -37,6 +37,10 @@
             android:name=".member.TeamActivity"
             android:label="@string/title_activity_team"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".member.MemberActivity"
+            android:label="@string/title_activity_member"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,12 +34,16 @@ public class TeamAdapter extends BaseDataAdapter {
     private ArrayList<Member> mMembers = new ArrayList<>();
     private boolean mIsCacheMode = false;
 
-    public TeamAdapter(Context context, ArrayList<Member> members, String path, boolean isCacheMode) {
+    private TeamInterface mTeamInterface;
+
+    public TeamAdapter(Context context, ArrayList<Member> members, String path, boolean isCacheMode, TeamInterface teamInterface) {
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
         this.mPath = path;
         this.mMembers = members;
         this.mIsCacheMode = isCacheMode;
+
+        this.mTeamInterface = teamInterface;
     }
 
     @Override
@@ -68,6 +74,7 @@ public class TeamAdapter extends BaseDataAdapter {
 
             holder = new ViewHolder();
             holder.loLoading = (RelativeLayout) view.findViewById(R.id.loLoading);
+            holder.cbLike = (CheckBox) view.findViewById(R.id.cbLike);
             holder.ivThumbnail = (ImageView) view.findViewById(R.id.ivThumbnail);
             holder.tvName = (TextView) view.findViewById(R.id.tvName);
             holder.tvNameSelected = (TextView) view.findViewById(R.id.tvNameSelected);
@@ -109,6 +116,14 @@ public class TeamAdapter extends BaseDataAdapter {
             }
         }
 
+        holder.ivThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Member m = mMembers.get(position);
+                mTeamInterface.onPicutreClick(m);
+            }
+        });
+
         if (member.isOshimember()) {
             holder.tvName.setVisibility(View.GONE);
             holder.tvNameSelected.setText(member.getName());
@@ -118,6 +133,56 @@ public class TeamAdapter extends BaseDataAdapter {
             holder.tvName.setVisibility(View.VISIBLE);
             holder.tvNameSelected.setVisibility(View.GONE);
         }
+
+        holder.cbLike.setChecked(member.isOshimember());
+        holder.cbLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Member m = mMembers.get(position);
+                mTeamInterface.onLikeClick(m);
+            }
+        });
+
+        /*
+        final View tvName = holder.tvName;
+        final View tvNameSelected = holder.tvNameSelected;
+
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Member m = mMembers.get(position);
+                //Log.e(mTag, m.getName());
+
+                if (m.isOshimember()) {
+                    tvName.setVisibility(View.VISIBLE);
+                    tvNameSelected.setVisibility(View.GONE);
+                } else {
+                    tvName.setVisibility(View.GONE);
+                    tvNameSelected.setVisibility(View.VISIBLE);
+                }
+
+                mTeamInterface.onLikeClick(m);
+            }
+        });
+
+        holder.tvNameSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Member m = mMembers.get(position);
+                //Log.e(mTag, m.getName());
+
+                if (m.isOshimember()) {
+                    tvName.setVisibility(View.VISIBLE);
+                    tvNameSelected.setVisibility(View.GONE);
+                } else {
+                    tvName.setVisibility(View.GONE);
+                    tvNameSelected.setVisibility(View.VISIBLE);
+                }
+
+                mTeamInterface.onLikeClick(m);
+            }
+        });
+        */
 
         return view;
     }
@@ -172,9 +237,9 @@ public class TeamAdapter extends BaseDataAdapter {
 
     static class ViewHolder {
         RelativeLayout loLoading;
+        CheckBox cbLike;
         ImageView ivThumbnail;
         TextView tvName;
         TextView tvNameSelected;
     }
 }
-

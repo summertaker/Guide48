@@ -4,5 +4,9 @@ import com.summertaker.guide48.data.Member;
 
 public interface TeamInterface {
 
-    void onMemberClick(Member member);
+    void onLikeClick(Member member);
+
+    void onPicutreClick(Member member);
+
+    void onNameClick(Member member);
 }

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,14 @@ import com.summertaker.guide48.parser.Hkt48Parser;
 import com.summertaker.guide48.parser.Ngt48Parser;
 import com.summertaker.guide48.parser.Nmb48Parser;
 import com.summertaker.guide48.parser.Ske48Parser;
+import com.summertaker.guide48.parser.Snh48Parser;
 import com.summertaker.guide48.parser.Stu48Parser;
 import com.summertaker.guide48.util.SlidingTabLayout;
 import com.summertaker.guide48.util.Util;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -233,8 +239,13 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
                 } else if (mGroup.getName().equals("STU48")) {
                     Stu48Parser stu48Parser = new Stu48Parser();
                     stu48Parser.parse(response, mGroup, mTeams, mMembers);
+                } else { // if (mGroup.getName().equals("SNH48")) {
+                    Snh48Parser snh48Parser = new Snh48Parser();
+                    snh48Parser.parse(response, mGroup, mTeams, mMembers);
                 }
+
                 mLoadCount = mTeams.size() + 1;
+
                 loadTeam();
             }
         }

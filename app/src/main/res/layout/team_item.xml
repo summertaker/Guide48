@@ -31,7 +31,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#66000000"
+                android:background="@color/card_caption_background"
                 android:gravity="center_horizontal"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
@@ -43,7 +43,7 @@
                 android:id="@+id/tvNameSelected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#aaD81B60"
+                android:background="@color/card_caption_background_selected"
                 android:gravity="center_horizontal"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
@@ -51,7 +51,15 @@
                 android:textColor="#ffffffff"
                 android:textSize="14sp"
                 android:visibility="gone" />
+
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
 
         <RelativeLayout
             android:id="@+id/loLoading"

@@ -29,6 +29,8 @@ public class BaseApplication extends Application {
     private ArrayList<Group> mGroups = new ArrayList<>();
     private ArrayList<Member> mOshimembers = new ArrayList<>();
 
+    private Member mMember = new Member();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,6 +42,12 @@ public class BaseApplication extends Application {
         mGroups.add(new Group("HKT48", R.drawable.logo_hkt48, "http://sp.hkt48.jp/qhkt48_list", Config.USER_AGENT_MOBILE));
         mGroups.add(new Group("NGT48", R.drawable.logo_ngt48, "http://ngt48.jp/profile", Config.USER_AGENT_DESKTOP));
         mGroups.add(new Group("STU48", R.drawable.logo_stu48, "http://www.stu48.com/feature/profile", Config.USER_AGENT_DESKTOP));
+
+        mGroups.add(new Group("SNH48", R.drawable.logo_snh48, "http://h5.snh48.com/resource/jsonp/members.php?gid=10", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("BEJ48", R.drawable.logo_bej48, "http://h5.snh48.com/resource/jsonp/members.php?gid=20", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("GNZ48", R.drawable.logo_gnz48, "http://h5.snh48.com/resource/jsonp/members.php?gid=30", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("SHY48", R.drawable.logo_shy48, "http://h5.snh48.com/resource/jsonp/members.php?gid=40", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("CKG48", R.drawable.logo_ckg48, "http://h5.snh48.com/resource/jsonp/members.php?gid=50", Config.USER_AGENT_DESKTOP));
 
         mOshimembers = loadMember(Config.PREFERENCE_KEY_OSHIMEMBERS);
     }
@@ -86,6 +94,14 @@ public class BaseApplication extends Application {
         }
 
         return group;
+    }
+
+    public Member getMember() {
+        return mMember;
+    }
+
+    public void setMember(Member mMember) {
+        this.mMember = mMember;
     }
 
     public ArrayList<Member> getOshimembers() {

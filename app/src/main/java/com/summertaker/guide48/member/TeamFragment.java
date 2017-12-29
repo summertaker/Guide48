@@ -2,6 +2,7 @@ package com.summertaker.guide48.member;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.summertaker.guide48.MainActivity;
 import com.summertaker.guide48.R;
+import com.summertaker.guide48.StartActivity;
 import com.summertaker.guide48.common.BaseApplication;
 import com.summertaker.guide48.common.BaseFragment;
 import com.summertaker.guide48.common.Config;
@@ -20,7 +23,7 @@ import com.summertaker.guide48.data.Member;
 import java.io.File;
 import java.util.ArrayList;
 
-public class TeamFragment extends BaseFragment {
+public class TeamFragment extends BaseFragment implements TeamInterface {
 
     private int mPosition;
     private boolean mIsCacheMode;
@@ -95,11 +98,12 @@ public class TeamFragment extends BaseFragment {
                 boolean isSuccess = dir.mkdirs(); // 이미지 파일 저장 위치 생성 (권한은 MainActivity에서 미리 획득)
             }
 
-            mAdapter = new TeamAdapter(getContext(), mMembers, path, mIsCacheMode);
+            mAdapter = new TeamAdapter(getContext(), mMembers, path, mIsCacheMode, this);
 
             GridView gridView = (GridView) rootView.findViewById(R.id.gridView);
             gridView.setAdapter(mAdapter);
 
+            /*
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,6 +143,7 @@ public class TeamFragment extends BaseFragment {
                     mAdapter.notifyDataSetChanged();
                 }
             });
+            */
 
             renderData();
         }
@@ -167,5 +172,53 @@ public class TeamFragment extends BaseFragment {
 
     public void refresh() {
         Log.e(mTag, "refresh()... Fragment(" + mPosition + ")");
+    }
+
+    @Override
+    public void onLikeClick(Member member) {
+        member.setOshimember(!member.isOshimember());
+        boolean isOshimember = member.isOshimember();
+
+        ArrayList<Member> oshiMembers = BaseApplication.getInstance().getOshimembers();
+
+        if (isOshimember) { // 추가
+            boolean isExist = false;
+            for (Member m : oshiMembers) {
+                if (m.getUrl().equals(member.getUrl())) {
+                    isExist = true;
+                }
+            }
+            if (!isExist) {
+                oshiMembers.add(member);
+            }
+        } else { // 제거
+            ArrayList<Member> members = new ArrayList<>();
+            for (Member m : oshiMembers) {
+                if (!m.getUrl().equals(member.getUrl())) {
+                    members.add(m);
+                }
+            }
+            oshiMembers = members;
+        }
+
+        BaseApplication.getInstance().setmOshimembers(oshiMembers);
+        //Log.e(mTag, "mOshiMembers.size() = " + oshiMembers.size());
+
+        BaseApplication.getInstance().saveMember(Config.PREFERENCE_KEY_OSHIMEMBERS, oshiMembers);
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPicutreClick(Member member) {
+        BaseApplication.getInstance().setMember(member);
+
+        Intent intent = new Intent(getActivity(), MemberActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onNameClick(Member member) {
+
     }
 }
