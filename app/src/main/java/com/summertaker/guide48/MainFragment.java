@@ -20,6 +20,7 @@ import com.summertaker.guide48.util.Util;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainFragment extends BaseFragment {
 
@@ -86,29 +87,32 @@ public class MainFragment extends BaseFragment {
     }
 
     public void renderData() {
-        final Member member = BaseApplication.getInstance().getOshimembers().get(mPosition);
-        if (member != null) {
-            //Log.e(mTag, "picture: " + member.getPicture());
-            String fileName = Util.getUrlToFileName(member.getPicture());
-            File file = new File(Config.DATA_PATH, fileName);
-            if (file.exists()) {
-                Picasso.with(mContext).load(file).into(mIvPicture);
-            } else {
-                Picasso.with(mContext).load(member.getPicture()).into(mIvPicture, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        //pbPictureLoading.setVisibility(View.GONE);
-                        //imageView.setVisibility(View.VISIBLE);
-                    }
+        ArrayList<Member> members = BaseApplication.getInstance().getOshimembers();
+        if (members.size() > mPosition) {
+            final Member member = members.get(mPosition);
+            if (member != null) {
+                //Log.e(mTag, "picture: " + member.getPicture());
+                String fileName = Util.getUrlToFileName(member.getPicture());
+                File file = new File(Config.DATA_PATH, fileName);
+                if (file.exists()) {
+                    Picasso.with(mContext).load(file).into(mIvPicture);
+                } else {
+                    Picasso.with(mContext).load(member.getPicture()).into(mIvPicture, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            //pbPictureLoading.setVisibility(View.GONE);
+                            //imageView.setVisibility(View.VISIBLE);
+                        }
 
-                    @Override
-                    public void onError() {
-                        //pbPictureLoading.setVisibility(View.GONE);
-                    }
-                });
+                        @Override
+                        public void onError() {
+                            //pbPictureLoading.setVisibility(View.GONE);
+                        }
+                    });
+                }
+
+                mTvName.setText(member.getName());
             }
-
-            mTvName.setText(member.getName());
         }
     }
 

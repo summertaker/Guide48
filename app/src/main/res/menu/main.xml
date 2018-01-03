@@ -8,4 +8,11 @@
         android:name="@string/action_add"
         android:title="@string/action_add"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_edit_white_24dp"
+        android:orderInCategory="100"
+        android:name="@string/action_edit"
+        android:title="@string/action_edit"
+        app:showAsAction="ifRoom" />
 </menu>

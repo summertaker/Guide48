@@ -53,7 +53,7 @@ public class GroupAdapter extends BaseDataAdapter {
 
             holder = new ViewHolder();
             holder.image = (ImageView) view.findViewById(R.id.ivPicture);
-            holder.name = (TextView) view.findViewById(R.id.tvCaption);
+            holder.name = (TextView) view.findViewById(R.id.tvName);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();

@@ -12,7 +12,8 @@ public class Member implements Serializable {
     private String thumbnail;
     private String picture;
     private String url;
-    private boolean isOshimember;
+    private boolean selected;
+    private boolean oshimember;
 
     public String getGroup() {
         return group;
@@ -62,11 +63,19 @@ public class Member implements Serializable {
         this.url = url;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public boolean isOshimember() {
-        return isOshimember;
+        return oshimember;
     }
 
     public void setOshimember(boolean oshimember) {
-        isOshimember = oshimember;
+        this.oshimember = oshimember;
     }
 }

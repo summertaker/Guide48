@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.summertaker.guide48.R;
 import com.summertaker.guide48.common.BaseDataAdapter;
+import com.summertaker.guide48.common.Config;
 import com.summertaker.guide48.data.Member;
 import com.summertaker.guide48.util.Util;
 
@@ -30,16 +31,14 @@ public class TeamAdapter extends BaseDataAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private String mPath;
     private ArrayList<Member> mMembers = new ArrayList<>();
     private boolean mIsCacheMode = false;
 
     private TeamInterface mTeamInterface;
 
-    public TeamAdapter(Context context, ArrayList<Member> members, String path, boolean isCacheMode, TeamInterface teamInterface) {
+    public TeamAdapter(Context context, ArrayList<Member> members, boolean isCacheMode, TeamInterface teamInterface) {
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
-        this.mPath = path;
         this.mMembers = members;
         this.mIsCacheMode = isCacheMode;
 
@@ -90,7 +89,7 @@ public class TeamAdapter extends BaseDataAdapter {
             holder.ivThumbnail.setImageResource(R.drawable.placeholder);
         } else {
             String fileName = Util.getUrlToFileName(imageUrl);
-            File file = new File(mPath, fileName);
+            File file = new File(Config.DATA_PATH, fileName);
 
             if (mIsCacheMode && file.exists()) {
                 holder.loLoading.setVisibility(View.GONE);
@@ -124,6 +123,15 @@ public class TeamAdapter extends BaseDataAdapter {
             }
         });
 
+        holder.cbLike.setChecked(member.isOshimember());
+        holder.cbLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Member m = mMembers.get(position);
+                mTeamInterface.onLikeClick((CheckBox) view, m);
+            }
+        });
+
         if (member.isOshimember()) {
             holder.tvName.setVisibility(View.GONE);
             holder.tvNameSelected.setText(member.getName());
@@ -134,34 +142,11 @@ public class TeamAdapter extends BaseDataAdapter {
             holder.tvNameSelected.setVisibility(View.GONE);
         }
 
-        holder.cbLike.setChecked(member.isOshimember());
-        holder.cbLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Member m = mMembers.get(position);
-                mTeamInterface.onLikeClick(m);
-            }
-        });
-
-        /*
-        final View tvName = holder.tvName;
-        final View tvNameSelected = holder.tvNameSelected;
-
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Member m = mMembers.get(position);
-                //Log.e(mTag, m.getName());
-
-                if (m.isOshimember()) {
-                    tvName.setVisibility(View.VISIBLE);
-                    tvNameSelected.setVisibility(View.GONE);
-                } else {
-                    tvName.setVisibility(View.GONE);
-                    tvNameSelected.setVisibility(View.VISIBLE);
-                }
-
-                mTeamInterface.onLikeClick(m);
+                mTeamInterface.onNameClick(m);
             }
         });
 
@@ -169,20 +154,9 @@ public class TeamAdapter extends BaseDataAdapter {
             @Override
             public void onClick(View view) {
                 Member m = mMembers.get(position);
-                //Log.e(mTag, m.getName());
-
-                if (m.isOshimember()) {
-                    tvName.setVisibility(View.VISIBLE);
-                    tvNameSelected.setVisibility(View.GONE);
-                } else {
-                    tvName.setVisibility(View.GONE);
-                    tvNameSelected.setVisibility(View.VISIBLE);
-                }
-
-                mTeamInterface.onLikeClick(m);
+                mTeamInterface.onNameClick(m);
             }
         });
-        */
 
         return view;
     }
@@ -199,7 +173,7 @@ public class TeamAdapter extends BaseDataAdapter {
                     public void run() {
                         boolean isSuccess;
 
-                        File file = new File(mPath, fileName);
+                        File file = new File(Config.DATA_PATH, fileName);
                         if (file.exists()) {
                             isSuccess = file.delete();
                             //Log.d("==", fileName + " deleted.");

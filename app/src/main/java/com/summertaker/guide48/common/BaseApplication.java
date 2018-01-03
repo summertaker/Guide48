@@ -42,6 +42,8 @@ public class BaseApplication extends Application {
         mGroups.add(new Group("HKT48", R.drawable.logo_hkt48, "http://sp.hkt48.jp/qhkt48_list", Config.USER_AGENT_MOBILE));
         mGroups.add(new Group("NGT48", R.drawable.logo_ngt48, "http://ngt48.jp/profile", Config.USER_AGENT_DESKTOP));
         mGroups.add(new Group("STU48", R.drawable.logo_stu48, "http://www.stu48.com/feature/profile", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("乃木坂46", R.drawable.logo_nogizaka46, "http://www.nogizaka46.com/smph/member/", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("欅坂46", R.drawable.logo_keyakizaka46, "http://www.keyakizaka46.com/s/k46o/search/artist?ima=0000", Config.USER_AGENT_MOBILE));
 
         mGroups.add(new Group("SNH48", R.drawable.logo_snh48, "http://h5.snh48.com/resource/jsonp/members.php?gid=10", Config.USER_AGENT_DESKTOP));
         mGroups.add(new Group("BEJ48", R.drawable.logo_bej48, "http://h5.snh48.com/resource/jsonp/members.php?gid=20", Config.USER_AGENT_DESKTOP));

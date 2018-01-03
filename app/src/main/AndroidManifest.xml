@@ -45,6 +45,10 @@
             android:name=".common.ImageViewerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OshiEditActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

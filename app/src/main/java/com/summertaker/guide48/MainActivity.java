@@ -140,7 +140,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onResume() {
         super.onResume();
 
-        mOshiMembers = BaseApplication.getInstance().getOshimembers();
+        //mOshiMembers.clear();
+        //mOshiMembers = BaseApplication.getInstance().getOshimembers();
+        mOshiMembers = BaseApplication.getInstance().loadMember(Config.PREFERENCE_KEY_OSHIMEMBERS);
         Collections.shuffle(mOshiMembers);
 
         mPagerAdapter = null;
@@ -171,7 +173,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         if (id == R.id.action_add) {
             Intent intent = new Intent(MainActivity.this, GroupActivity.class);
-            startActivityForResult(intent, 100);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_edit) {
+            Intent intent = new Intent(MainActivity.this, OshiEditActivity.class);
+            startActivity(intent);
             return true;
         }
 

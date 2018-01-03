@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.GridView;
 
 import com.summertaker.guide48.MainActivity;
@@ -98,7 +99,7 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
                 boolean isSuccess = dir.mkdirs(); // 이미지 파일 저장 위치 생성 (권한은 MainActivity에서 미리 획득)
             }
 
-            mAdapter = new TeamAdapter(getContext(), mMembers, path, mIsCacheMode, this);
+            mAdapter = new TeamAdapter(getContext(), mMembers, mIsCacheMode, this);
 
             GridView gridView = (GridView) rootView.findViewById(R.id.gridView);
             gridView.setAdapter(mAdapter);
@@ -168,6 +169,9 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
     public void onStop() {
         super.onStop();
         BaseApplication.getInstance().cancelPendingRequests(mVolleyTag);
+
+        ArrayList<Member> oshiMembers = BaseApplication.getInstance().getOshimembers();
+        BaseApplication.getInstance().saveMember(Config.PREFERENCE_KEY_OSHIMEMBERS, oshiMembers);
     }
 
     public void refresh() {
@@ -175,7 +179,24 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
     }
 
     @Override
-    public void onLikeClick(Member member) {
+    public void onPicutreClick(Member member) {
+        saveData(member);
+    }
+
+    @Override
+    public void onLikeClick(CheckBox checkBox, Member member) {
+        saveData(member);
+    }
+
+    @Override
+    public void onNameClick(Member member) {
+        BaseApplication.getInstance().setMember(member);
+
+        Intent intent = new Intent(getActivity(), MemberActivity.class);
+        startActivity(intent);
+    }
+
+    private void saveData(Member member) {
         member.setOshimember(!member.isOshimember());
         boolean isOshimember = member.isOshimember();
 
@@ -204,21 +225,6 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
         BaseApplication.getInstance().setmOshimembers(oshiMembers);
         //Log.e(mTag, "mOshiMembers.size() = " + oshiMembers.size());
 
-        BaseApplication.getInstance().saveMember(Config.PREFERENCE_KEY_OSHIMEMBERS, oshiMembers);
-
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onPicutreClick(Member member) {
-        BaseApplication.getInstance().setMember(member);
-
-        Intent intent = new Intent(getActivity(), MemberActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onNameClick(Member member) {
-
     }
 }

@@ -1,5 +1,6 @@
 package com.summertaker.guide48.parser;
 
+import com.summertaker.guide48.common.BaseParser;
 import com.summertaker.guide48.data.Group;
 import com.summertaker.guide48.data.Member;
 import com.summertaker.guide48.data.Team;
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Snh48Parser {
+public class Snh48Parser extends BaseParser {
 
     public void parse(String html, Group group, ArrayList<Team> teams, ArrayList<Member> members) {
         /*

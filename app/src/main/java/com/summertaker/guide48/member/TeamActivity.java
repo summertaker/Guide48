@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,17 +27,15 @@ import com.summertaker.guide48.data.Member;
 import com.summertaker.guide48.data.Team;
 import com.summertaker.guide48.parser.Akb48Parser;
 import com.summertaker.guide48.parser.Hkt48Parser;
+import com.summertaker.guide48.parser.Keyakizaka46Parser;
 import com.summertaker.guide48.parser.Ngt48Parser;
 import com.summertaker.guide48.parser.Nmb48Parser;
+import com.summertaker.guide48.parser.Nogizaka46Parser;
 import com.summertaker.guide48.parser.Ske48Parser;
 import com.summertaker.guide48.parser.Snh48Parser;
 import com.summertaker.guide48.parser.Stu48Parser;
 import com.summertaker.guide48.util.SlidingTabLayout;
 import com.summertaker.guide48.util.Util;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -75,10 +72,10 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
 
         initToolbar(mGroup.getName());
 
-        mLoLoading = (RelativeLayout) findViewById(R.id.loLoading);
-        mLoContent = (LinearLayout) findViewById(R.id.loContent);
+        mLoLoading = findViewById(R.id.loLoading);
+        mLoContent = findViewById(R.id.loContent);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
         mSlidingTabLayout = findViewById(R.id.sliding_tabs);
 
         loadGroup();
@@ -92,7 +89,7 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_team, menu);
+        getMenuInflater().inflate(R.menu.team, menu);
         return true;
     }
 
@@ -239,6 +236,12 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
                 } else if (mGroup.getName().equals("STU48")) {
                     Stu48Parser stu48Parser = new Stu48Parser();
                     stu48Parser.parse(response, mGroup, mTeams, mMembers);
+                } else if (mGroup.getName().equals("乃木坂46")) {
+                    Nogizaka46Parser nogizaka46Parser = new Nogizaka46Parser();
+                    nogizaka46Parser.parse(response, mGroup, mTeams, mMembers);
+                } else if (mGroup.getName().equals("欅坂46")) {
+                    Keyakizaka46Parser keyakizaka46Parser = new Keyakizaka46Parser();
+                    keyakizaka46Parser.parse(response, mGroup, mTeams, mMembers);
                 } else { // if (mGroup.getName().equals("SNH48")) {
                     Snh48Parser snh48Parser = new Snh48Parser();
                     snh48Parser.parse(response, mGroup, mTeams, mMembers);

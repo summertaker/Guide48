@@ -15,7 +15,7 @@
         android:scaleType="fitCenter" />
 
     <TextView
-        android:id="@+id/tvCaption"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp" />
