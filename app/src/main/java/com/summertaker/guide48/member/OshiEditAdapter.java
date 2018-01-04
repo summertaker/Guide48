@@ -1,4 +1,4 @@
-package com.summertaker.guide48;
+package com.summertaker.guide48.member;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.summertaker.guide48.R;
 import com.summertaker.guide48.common.BaseDataAdapter;
 import com.summertaker.guide48.common.Config;
 import com.summertaker.guide48.data.Member;
@@ -69,7 +70,7 @@ public class OshiEditAdapter extends BaseDataAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        String imageUrl = member.getPicture(); // member.getThumbnail();
+        String imageUrl = member.getPictureUrl(); // member.getThumbnail();
 
         if (imageUrl == null || imageUrl.isEmpty()) {
             //holder.loLoading.setVisibility(View.GONE);

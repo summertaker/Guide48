@@ -54,12 +54,12 @@ public class Keyakizaka46Parser extends BaseParser {
 
                 for (Element row : ul.select("li")) {
                     String name;
-                    String thumbnail;
-                    String picture;
-                    String url;
+                    String thumbnailUrl;
+                    String pictureUrl;
+                    String profileUrl;
 
                     Element a = row.select("a").first();
-                    url = "http://www.keyakizaka46.com" + a.attr("href");
+                    profileUrl = "http://www.keyakizaka46.com" + a.attr("href");
 
                     Element img = a.select("img").first();
                     if (img == null) {
@@ -67,20 +67,21 @@ public class Keyakizaka46Parser extends BaseParser {
                     }
 
                     String src = img.attr("src");
-                    thumbnail = src;
-                    picture = src;
+                    thumbnailUrl = src;
+                    pictureUrl = src;
 
                     name = a.select("p.name").text();
 
                     //Log.e(mTag, teamName + " / " + name);
 
                     Member member = new Member();
-                    member.setGroup(group.getName());
-                    member.setTeam(teamName);
+                    member.setGroupId(group.getId());
+                    member.setGroupName(group.getName());
+                    member.setTeamName(team.getName());
                     member.setName(name);
-                    member.setThumbnail(thumbnail);
-                    member.setPicture(picture);
-                    member.setUrl(url);
+                    member.setThumbnailUrl(thumbnailUrl);
+                    member.setPictureUrl(pictureUrl);
+                    member.setProfileUrl(profileUrl);
 
                     members.add(member);
                 }

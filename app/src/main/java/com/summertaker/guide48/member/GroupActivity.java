@@ -72,7 +72,7 @@ public class GroupActivity extends BaseActivity {
                 //loadGroup();
 
                 Intent intent = new Intent(mContext, TeamActivity.class);
-                intent.putExtra("groupName", mGroup.getName());
+                intent.putExtra("groupId", mGroup.getId());
                 startActivityForResult(intent, 100);
             }
         });

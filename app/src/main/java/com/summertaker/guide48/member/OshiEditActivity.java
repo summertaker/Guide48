@@ -1,7 +1,6 @@
-package com.summertaker.guide48;
+package com.summertaker.guide48.member;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.GridView;
 
+import com.summertaker.guide48.R;
 import com.summertaker.guide48.common.BaseActivity;
 import com.summertaker.guide48.common.BaseApplication;
 import com.summertaker.guide48.common.Config;

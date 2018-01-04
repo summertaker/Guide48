@@ -92,12 +92,12 @@ public class MainFragment extends BaseFragment {
             final Member member = members.get(mPosition);
             if (member != null) {
                 //Log.e(mTag, "picture: " + member.getPicture());
-                String fileName = Util.getUrlToFileName(member.getPicture());
+                String fileName = Util.getUrlToFileName(member.getPictureUrl());
                 File file = new File(Config.DATA_PATH, fileName);
                 if (file.exists()) {
                     Picasso.with(mContext).load(file).into(mIvPicture);
                 } else {
-                    Picasso.with(mContext).load(member.getPicture()).into(mIvPicture, new com.squareup.picasso.Callback() {
+                    Picasso.with(mContext).load(member.getPictureUrl()).into(mIvPicture, new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
                             //pbPictureLoading.setVisibility(View.GONE);

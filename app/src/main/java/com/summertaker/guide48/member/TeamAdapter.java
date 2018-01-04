@@ -82,7 +82,7 @@ public class TeamAdapter extends BaseDataAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        String imageUrl = member.getPicture(); // member.getThumbnail();
+        String imageUrl = member.getPictureUrl(); // member.getThumbnail();
 
         if (imageUrl == null || imageUrl.isEmpty()) {
             holder.loLoading.setVisibility(View.GONE);

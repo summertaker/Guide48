@@ -57,16 +57,16 @@ public class Nogizaka46Parser extends BaseParser {
 
                 for (Element row : ul.select("li")) {
                     String name;
-                    String thumbnail;
-                    String picture;
-                    String url;
+                    String thumbnailUrl;
+                    String pictureUrl;
+                    String profileUrl;
 
                     Element el;
 
                     Element a = row.select("a").first();
-                    url = a.attr("href");
-                    url = url.replace("./", "/");
-                    url = "http://www.nogizaka46.com/smph/member" + url;
+                    profileUrl = a.attr("href");
+                    profileUrl = profileUrl.replace("./", "/");
+                    profileUrl = "http://www.nogizaka46.com/smph/member" + profileUrl;
 
                     Element img = a.select("img").first();
                     if (img == null) {
@@ -77,24 +77,25 @@ public class Nogizaka46Parser extends BaseParser {
 
                     // http://www.nogizaka46.com/smph/member/img/mukaihazuki_list.jpg?v2
                     src = "http://www.nogizaka46.com" + src;
-                    thumbnail = src;
+                    thumbnailUrl = src;
 
                     // http://img.nogizaka46.com/www/smph/member/img/nakamurareno_prof.jpg?v201303
                     src = src.replace("http://www.nogizaka46.com/smph/member/img/", "http://img.nogizaka46.com/www/smph/member/img/");
                     src = src.replace("_list.jpg", "_prof.jpg");
-                    picture = src;
+                    pictureUrl = src;
 
                     name = a.select(".heading").text();
 
                     //Log.e(mTag, name + " / " + thumbnailUrl + " / " + profileUrl);
 
                     Member member = new Member();
-                    member.setGroup(group.getName());
-                    member.setTeam(teamName);
+                    member.setGroupId(group.getId());
+                    member.setGroupName(group.getName());
+                    member.setTeamName(team.getName());
                     member.setName(name);
-                    member.setThumbnail(thumbnail);
-                    member.setPicture(picture);
-                    member.setUrl(url);
+                    member.setThumbnailUrl(thumbnailUrl);
+                    member.setPictureUrl(pictureUrl);
+                    member.setProfileUrl(profileUrl);
 
                     members.add(member);
                 }

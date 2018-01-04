@@ -59,20 +59,20 @@ public class Hkt48Parser extends BaseParser {
             Element ul = h1.nextElementSibling();
             for (Element li : ul.select("li")) {
                 String name;
-                String thumbnail;
-                String picture;
-                String url;
+                String thumbnailUrl;
+                String pictureUrl;
+                String profileUrl;
 
                 Element a = li.select("a").first();
-                url = a.attr("href");
-                url = "http://sp.hkt48.jp/" + url;
+                profileUrl = a.attr("href");
+                profileUrl = "http://sp.hkt48.jp/" + profileUrl;
 
                 // http://cache.hkt48sp.qw.to/img/profile/member/15-thumb.jpg?cache=20171228090418
                 // http://cache.hkt48sp.qw.to/img/profile/member/15-large.jpg?cache=20171228093645
                 Element img = a.select("img").first();
                 String src = img.attr("src");
-                thumbnail = src;
-                picture = src.replace("-thumb.", "-large.");
+                thumbnailUrl = src;
+                pictureUrl = src.replace("-thumb.", "-large.");
 
                 Element n = li.select(".name").first();
                 name = n.text();
@@ -80,12 +80,13 @@ public class Hkt48Parser extends BaseParser {
                 //Log.e(mTag, teamName + ", " + name + ", " + thumbnail + ", " + picture);
 
                 Member member = new Member();
-                member.setGroup(group.getName());
-                member.setTeam(teamName);
+                member.setGroupId(group.getId());
+                member.setGroupName(group.getName());
+                member.setTeamName(team.getName());
                 member.setName(name);
-                member.setThumbnail(thumbnail);
-                member.setPicture(picture);
-                member.setUrl(url);
+                member.setThumbnailUrl(thumbnailUrl);
+                member.setPictureUrl(pictureUrl);
+                member.setProfileUrl(profileUrl);
 
                 members.add(member);
             }

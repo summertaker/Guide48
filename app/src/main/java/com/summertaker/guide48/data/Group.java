@@ -8,16 +8,26 @@ public class Group implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String id;
     private String name;
     private int logo;
     private String url;
     private String userAgent;
 
-    public Group(String name, int logo, String url, String userAgent) {
+    public Group(String id, String name, int logo, String url, String userAgent) {
+        this.id = id;
         this.name = name;
         this.logo = logo;
         this.url = url;
         this.userAgent = userAgent;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getLogo() {

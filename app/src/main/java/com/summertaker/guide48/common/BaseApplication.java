@@ -36,20 +36,20 @@ public class BaseApplication extends Application {
         super.onCreate();
         mInstance = this;
 
-        mGroups.add(new Group("AKB48", R.drawable.logo_akb48, "http://sp.akb48.co.jp/profile/", Config.USER_AGENT_MOBILE));
-        mGroups.add(new Group("SKE48", R.drawable.logo_ske48, "http://spn.ske48.co.jp/profile/list.php", Config.USER_AGENT_MOBILE));
-        mGroups.add(new Group("NMB48", R.drawable.logo_nmb48, "http://spn2.nmb48.com/profile/list.php", Config.USER_AGENT_MOBILE));
-        mGroups.add(new Group("HKT48", R.drawable.logo_hkt48, "http://sp.hkt48.jp/qhkt48_list", Config.USER_AGENT_MOBILE));
-        mGroups.add(new Group("NGT48", R.drawable.logo_ngt48, "http://ngt48.jp/profile", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("STU48", R.drawable.logo_stu48, "http://www.stu48.com/feature/profile", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("乃木坂46", R.drawable.logo_nogizaka46, "http://www.nogizaka46.com/smph/member/", Config.USER_AGENT_MOBILE));
-        mGroups.add(new Group("欅坂46", R.drawable.logo_keyakizaka46, "http://www.keyakizaka46.com/s/k46o/search/artist?ima=0000", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("akb48", "AKB48", R.drawable.logo_akb48, "http://sp.akb48.co.jp/profile/", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("ske48", "SKE48", R.drawable.logo_ske48, "http://spn.ske48.co.jp/profile/list.php", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("nmb48", "NMB48", R.drawable.logo_nmb48, "http://spn2.nmb48.com/profile/list.php", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("hkt48", "HKT48", R.drawable.logo_hkt48, "http://sp.hkt48.jp/qhkt48_list", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("ngt48", "NGT48", R.drawable.logo_ngt48, "http://ngt48.jp/profile", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("stu48", "STU48", R.drawable.logo_stu48, "http://www.stu48.com/feature/profile", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("nogizaka46", "乃木坂46", R.drawable.logo_nogizaka46, "http://www.nogizaka46.com/smph/member/", Config.USER_AGENT_MOBILE));
+        mGroups.add(new Group("keyakizaka46", "欅坂46", R.drawable.logo_keyakizaka46, "http://www.keyakizaka46.com/s/k46o/search/artist?ima=0000", Config.USER_AGENT_MOBILE));
 
-        mGroups.add(new Group("SNH48", R.drawable.logo_snh48, "http://h5.snh48.com/resource/jsonp/members.php?gid=10", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("BEJ48", R.drawable.logo_bej48, "http://h5.snh48.com/resource/jsonp/members.php?gid=20", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("GNZ48", R.drawable.logo_gnz48, "http://h5.snh48.com/resource/jsonp/members.php?gid=30", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("SHY48", R.drawable.logo_shy48, "http://h5.snh48.com/resource/jsonp/members.php?gid=40", Config.USER_AGENT_DESKTOP));
-        mGroups.add(new Group("CKG48", R.drawable.logo_ckg48, "http://h5.snh48.com/resource/jsonp/members.php?gid=50", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("snh48", "SNH48", R.drawable.logo_snh48, "http://h5.snh48.com/resource/jsonp/members.php?gid=10", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("bej48", "BEJ48", R.drawable.logo_bej48, "http://h5.snh48.com/resource/jsonp/members.php?gid=20", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("gnz48", "GNZ48", R.drawable.logo_gnz48, "http://h5.snh48.com/resource/jsonp/members.php?gid=30", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("shy48", "SHY48", R.drawable.logo_shy48, "http://h5.snh48.com/resource/jsonp/members.php?gid=40", Config.USER_AGENT_DESKTOP));
+        mGroups.add(new Group("ckg48", "CKG48", R.drawable.logo_ckg48, "http://h5.snh48.com/resource/jsonp/members.php?gid=50", Config.USER_AGENT_DESKTOP));
 
         mOshimembers = loadMember(Config.PREFERENCE_KEY_OSHIMEMBERS);
     }
@@ -86,10 +86,10 @@ public class BaseApplication extends Application {
         return mGroups;
     }
 
-    public Group getGroup(String name) {
+    public Group getGroupById(String id) {
         Group group = null;
         for (Group data : mGroups) {
-            if (data.getName().equals(name)) {
+            if (data.getId().equals(id)) {
                 group = data;
                 break;
             }
@@ -129,12 +129,13 @@ public class BaseApplication extends Application {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
                     Member m = new Member();
-                    m.setGroup(obj.getString("group"));
-                    m.setTeam(obj.getString("team"));
+                    m.setGroupId(obj.getString("groupId"));
+                    m.setGroupName(obj.getString("groupName"));
+                    m.setTeamName(obj.getString("teamName"));
                     m.setName(obj.getString("name"));
-                    m.setThumbnail(obj.getString("thumbnail"));
-                    m.setPicture(obj.getString("picture"));
-                    m.setUrl(obj.getString("url"));
+                    m.setThumbnailUrl(obj.getString("thumbnailUrl"));
+                    m.setPictureUrl(obj.getString("pictureUrl"));
+                    m.setProfileUrl(obj.getString("profileUrl"));
                     m.setOshimember(obj.getBoolean("isOshimember"));
                     members.add(m);
                 }
@@ -155,12 +156,13 @@ public class BaseApplication extends Application {
 
             for (Member member : members) {
                 JSONObject o = new JSONObject();
-                o.put("group", member.getGroup());
-                o.put("team", member.getTeam());
+                o.put("groupId", member.getGroupId());
+                o.put("groupName", member.getGroupName());
+                o.put("teamName", member.getTeamName());
                 o.put("name", member.getName());
-                o.put("thumbnail", member.getThumbnail());
-                o.put("picture", member.getPicture());
-                o.put("url", member.getUrl());
+                o.put("thumbnailUrl", member.getThumbnailUrl());
+                o.put("pictureUrl", member.getPictureUrl());
+                o.put("profileUrl", member.getProfileUrl());
                 o.put("isOshimember", member.isOshimember());
                 array.put(o);
             }

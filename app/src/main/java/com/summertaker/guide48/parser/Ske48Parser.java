@@ -93,37 +93,38 @@ public class Ske48Parser extends BaseParser {
 
         for (Element li : root.select("li")) {
             String name;
-            String thumbnail;
-            String picture;
-            String url;
+            String thumbnailUrl;
+            String pictureUrl;
+            String profileUrl;
 
             Element el;
 
             Element a = li.select("a").first();
-            url = a.attr("href");
-            url = "http://spn.ske48.co.jp/profile/" + url;
+            profileUrl = a.attr("href");
+            profileUrl = "http://spn.ske48.co.jp/profile/" + profileUrl;
 
             Element img = a.select("img").first();
             if (img == null) {
                 continue;
             }
             String src = img.attr("src");
-            thumbnail = src;
-            picture = src;
+            thumbnailUrl = src;
+            pictureUrl = src;
 
             name = img.attr("alt");
 
             //Log.e(mTag, group.getName() + " / " + team.getName() + " / " + name + " / " + profileUrl);
 
-            Member data = new Member();
-            data.setGroup(group.getName());
-            data.setTeam(team.getName());
-            data.setName(name);
-            data.setThumbnail(thumbnail);
-            data.setPicture(picture);
-            data.setUrl(url);
+            Member member = new Member();
+            member.setGroupId(group.getId());
+            member.setGroupName(group.getName());
+            member.setTeamName(team.getName());
+            member.setName(name);
+            member.setThumbnailUrl(thumbnailUrl);
+            member.setPictureUrl(pictureUrl);
+            member.setProfileUrl(profileUrl);
 
-            members.add(data);
+            members.add(member);
         }
     }
 

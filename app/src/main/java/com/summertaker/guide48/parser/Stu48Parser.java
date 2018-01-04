@@ -56,14 +56,14 @@ public class Stu48Parser extends BaseParser {
 
             for (Element row : root.select("li")) {
                 String name;
-                String thumbnail;
-                String picture;
-                String url;
+                String thumbnailUrl;
+                String pictureUrl;
+                String profileUrl;
 
                 Element el;
 
                 Element a = row.select("a").first();
-                url = "http://sp.stu48.com" + a.attr("href");
+                profileUrl = "http://sp.stu48.com" + a.attr("href");
 
                 Element img = a.select("img").first();
                 if (img == null) {
@@ -73,23 +73,24 @@ public class Stu48Parser extends BaseParser {
                 String src = img.attr("style");
                 src = src.replace("background-image:url(", "");
                 src = src.replace(");", "");
-                thumbnail = src;
+                thumbnailUrl = src;
 
                 // http://www.stu48.com/image/profile/ishida_chiho_original.jpg
                 src = src.replace(".jpg", "_original.jpg");
-                picture = src;
+                pictureUrl = src;
 
                 name = a.select("p.name").text();
 
                 //Log.e(mTag, name + " / " + thumbnailUrl + " / " + profileUrl);
 
                 Member member = new Member();
-                member.setGroup(group.getName());
-                member.setTeam(teamName);
+                member.setGroupId(group.getId());
+                member.setGroupName(group.getName());
+                member.setTeamName(team.getName());
                 member.setName(name);
-                member.setThumbnail(thumbnail);
-                member.setPicture(picture);
-                member.setUrl(url);
+                member.setThumbnailUrl(thumbnailUrl);
+                member.setPictureUrl(pictureUrl);
+                member.setProfileUrl(profileUrl);
 
                 members.add(member);
             }

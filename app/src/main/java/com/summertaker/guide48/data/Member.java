@@ -6,29 +6,38 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String group;
-    private String team;
+    private String groupId;
+    private String groupName;
+    private String teamName;
     private String name;
-    private String thumbnail;
-    private String picture;
-    private String url;
+    private String thumbnailUrl;
+    private String pictureUrl;
+    private String profileUrl;
     private boolean selected;
     private boolean oshimember;
 
-    public String getGroup() {
-        return group;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
-    public String getTeam() {
-        return team;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getName() {
@@ -39,28 +48,28 @@ public class Member implements Serializable {
         this.name = name;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
-    public String getUrl() {
-        return url;
+    public String getProfileUrl() {
+        return profileUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
     }
 
     public boolean isSelected() {

@@ -73,26 +73,27 @@ public class Snh48Parser extends BaseParser {
                 String sid = "";
                 String teamName = "";
                 String name = "";
-                String thumbnail = "";
-                String picture = "";
-                String url = "";
+                String thumbnailUrl = "";
+                String pictureUrl = "";
+                String profileUrl = "";
 
                 sid = o.getString("sid");
                 teamName = o.getString("tname");
                 name = o.getString("fname");
 
-                thumbnail = domain + "/images/member/mp_" + sid + ".jpg";
-                picture = domain + "/images/member/zp_" + sid + ".jpg";
+                thumbnailUrl = domain + "/images/member/mp_" + sid + ".jpg";
+                pictureUrl = domain + "/images/member/zp_" + sid + ".jpg";
 
-                url = domain + "/member_details.html?sid=" + sid;
+                profileUrl = domain + "/member_details.html?sid=" + sid;
 
                 Member member = new Member();
-                member.setGroup(group.getName());
-                member.setTeam(teamName);
+                member.setGroupId(group.getId());
+                member.setGroupName(group.getName());
+                member.setTeamName(teamName);
                 member.setName(name);
-                member.setThumbnail(thumbnail);
-                member.setPicture(picture);
-                member.setUrl(url);
+                member.setThumbnailUrl(thumbnailUrl);
+                member.setPictureUrl(pictureUrl);
+                member.setProfileUrl(profileUrl);
 
                 members.add(member);
             }

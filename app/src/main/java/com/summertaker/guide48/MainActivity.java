@@ -1,21 +1,18 @@
 package com.summertaker.guide48;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +22,7 @@ import com.summertaker.guide48.common.BaseApplication;
 import com.summertaker.guide48.common.Config;
 import com.summertaker.guide48.data.Member;
 import com.summertaker.guide48.member.GroupActivity;
-import com.summertaker.guide48.member.TeamFragment;
+import com.summertaker.guide48.member.OshiEditActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;

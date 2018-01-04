@@ -57,10 +57,11 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
         }
     }
 
-    public static TeamFragment newInstance(int position, String groupName, String teamName, boolean isCacheMode) {
+    public static TeamFragment newInstance(int position, String groupId, String groupName, String teamName, boolean isCacheMode) {
         TeamFragment fragment = new TeamFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
+        args.putString("groupId", groupId);
         args.putString("groupName", groupName);
         args.putString("teamName", teamName);
         args.putBoolean("isCacheMode", isCacheMode);
@@ -76,19 +77,20 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
         Bundle bundle = getArguments();
         if (bundle != null) {
             mPosition = getArguments().getInt("position", 0);
+            String groupId = bundle.getString("groupId");
             String groupName = bundle.getString("groupName");
             String teamName = bundle.getString("teamName");
             mIsCacheMode = bundle.getBoolean("isCacheMode");
 
             //Log.e(mTag, "teamName: " + teamName);
 
-            ArrayList<Member> members = BaseApplication.getInstance().loadMember(groupName);
+            ArrayList<Member> members = BaseApplication.getInstance().loadMember(groupId);
             //Log.e(mTag, "members.size() = " + members.size());
 
             mMembers.clear(); // Activity 에서 Refresh 하는 경우에 대한 초기화 (초기화 안 하면 데이터가 중복으로 증가)
 
             for (Member member : members) {
-                if (member.getTeam().equals(teamName)) {
+                if (member.getTeamName().equals(teamName)) {
                     mMembers.add(member);
                 }
             }
@@ -190,6 +192,7 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
 
     @Override
     public void onNameClick(Member member) {
+        //Log.e(mTag, "member.getGroupId(): " + member.getGroupId());
         BaseApplication.getInstance().setMember(member);
 
         Intent intent = new Intent(getActivity(), MemberActivity.class);
@@ -205,7 +208,7 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
         if (isOshimember) { // 추가
             boolean isExist = false;
             for (Member m : oshiMembers) {
-                if (m.getUrl().equals(member.getUrl())) {
+                if (m.getProfileUrl().equals(member.getProfileUrl())) {
                     isExist = true;
                 }
             }
@@ -215,7 +218,7 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
         } else { // 제거
             ArrayList<Member> members = new ArrayList<>();
             for (Member m : oshiMembers) {
-                if (!m.getUrl().equals(member.getUrl())) {
+                if (!m.getProfileUrl().equals(member.getProfileUrl())) {
                     members.add(m);
                 }
             }

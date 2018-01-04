@@ -19,22 +19,22 @@ public class GroupAdapter extends BaseDataAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
 
-    private ArrayList<Group> mDataList = new ArrayList<>();
+    private ArrayList<Group> mGroups = new ArrayList<>();
 
-    public GroupAdapter(Context context, ArrayList<Group> dataList) {
+    public GroupAdapter(Context context, ArrayList<Group> groups) {
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
-        this.mDataList = dataList;
+        this.mGroups = groups;
     }
 
     @Override
     public int getCount() {
-        return mDataList.size();
+        return mGroups.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mDataList.get(position);
+        return mGroups.get(position);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class GroupAdapter extends BaseDataAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         ViewHolder holder = null;
+        Group group = mGroups.get(position);
 
         if (view == null) {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
@@ -59,9 +60,8 @@ public class GroupAdapter extends BaseDataAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        Group item = mDataList.get(position);
-        holder.image.setImageResource(item.getLogo());
-        holder.name.setText(item.getName());
+        holder.image.setImageResource(group.getLogo());
+        holder.name.setText(group.getName());
 
         //Log.e(mTag, "item.getName(): " + item.getName());
 

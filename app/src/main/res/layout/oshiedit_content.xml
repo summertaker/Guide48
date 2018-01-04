@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/card_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.summertaker.guide48.OshiEditActivity"
+    tools:context="com.summertaker.guide48.member.OshiEditActivity"
     tools:showIn="@layout/oshiedit_activity">
 
     <GridView

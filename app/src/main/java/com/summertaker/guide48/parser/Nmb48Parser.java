@@ -83,15 +83,15 @@ public class Nmb48Parser extends BaseParser {
 
         for (Element li : root.select("li")) {
             String name;
-            String thumbnail;
-            String picture;
-            String url;
+            String thumbnailUrl;
+            String pictureUrl;
+            String profileUrl;
 
             Element el;
 
             Element a = li.select("a").first();
-            url = a.attr("href");
-            url = "http://spn2.nmb48.com" + url;
+            profileUrl = a.attr("href");
+            profileUrl = "http://spn2.nmb48.com" + profileUrl;
 
             Element img = a.select("img").first();
             if (img == null) {
@@ -102,79 +102,21 @@ public class Nmb48Parser extends BaseParser {
             String src = img.attr("src");
             src = src.replace("../", "/");
             src = "http://spn2.nmb48.com" + src;
-            thumbnail = src;
-            picture = src;
+            thumbnailUrl = src;
+            pictureUrl = src;
 
             //Log.e(mTag, group.getName() + " / " + team.getName() + " / " + name + " / " + profileUrl);
 
-            Member data = new Member();
-            data.setGroup(group.getName());
-            data.setTeam(team.getName());
-            data.setName(name);
-            data.setThumbnail(thumbnail);
-            data.setPicture(picture);
-            data.setUrl(url);
+            Member member = new Member();
+            member.setGroupId(group.getId());
+            member.setGroupName(group.getName());
+            member.setTeamName(team.getName());
+            member.setName(name);
+            member.setThumbnailUrl(thumbnailUrl);
+            member.setPictureUrl(pictureUrl);
+            member.setProfileUrl(profileUrl);
 
-            members.add(data);
-        }
-    }
-
-    public void parseMemberList(String response, ArrayList<Member> memberList) {
-        /*
-        <ul class="team_list">
-            <li>
-                <a href="/profile/?id=azuma_yuki">
-                    <span class="photo_guard"></span>
-                    <img src="../img/profile/n/azuma_yuki.jpg" alt="東由樹"/>
-                    東由樹
-                    <span class="english">YUKI AZUMA</span>
-                </a>
-            </li>
-        */
-        if (response == null || response.isEmpty()) {
-            return;
-        }
-
-        response = Util.getJapaneseString(response, "8859_1");
-
-        Document doc = Jsoup.parse(response);
-        Element root = doc.select(".team_list").first();
-
-        if (root != null) {
-            for (Element row : root.select("li")) {
-                String name;
-                String thumbnailUrl;
-                String imageUrl;
-                String profileUrl;
-
-                Element el;
-
-                Element a = row.select("a").first();
-                profileUrl = "http://spn2.nmb48.com" + a.attr("href");
-
-                Element img = a.select("img").first();
-                if (img == null) {
-                    continue;
-                }
-                String src = img.attr("src");
-                src = src.replace("../img/", "/img/");
-                src = "http://spn2.nmb48.com" + src;
-                thumbnailUrl = src;
-
-                src = src.replace("/n/", "/large/");
-                imageUrl = src;
-
-                name = img.attr("alt");
-
-                //Log.e(mTag, name + " / " + nameEn + " / " + thumbnailUrl + " / " + profileUrl);
-
-                Member member = new Member();
-                member.setName(name);
-                member.setThumbnail(thumbnailUrl);
-                member.setPicture(imageUrl);
-                member.setUrl(profileUrl);
-                memberList.add(member);
-            }
+            members.add(member);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.summertaker.guide48;
+package com.summertaker.guide48.member;
 
 import android.widget.CheckBox;
 

@@ -58,14 +58,14 @@ public class MemberActivity extends BaseActivity {
         //Picasso.with(mContext).load(mMember.getPicture()).into(ivPicture);
 
         ImageView ivPicture;
-        if (mMember.getGroup().equals("AKB48")) {
+        if (mMember.getGroupId().equals("akb48")) {
             ivPicture = findViewById(R.id.ivPictureCrop);
         } else {
             ivPicture = findViewById(R.id.ivPictureWrap);
         }
         ivPicture.setVisibility(View.VISIBLE);
 
-        Picasso.with(mContext).load(mMember.getPicture()).into(ivPicture);
+        Picasso.with(mContext).load(mMember.getPictureUrl()).into(ivPicture);
 
         loadYahoo();
     }
@@ -77,14 +77,13 @@ public class MemberActivity extends BaseActivity {
     }
 
     private void loadYahoo() {
-        String query = mMember.getGroup() + " " + mMember.getName().replace(" ", "");
+        String query = mMember.getGroupName() + " " + mMember.getName().replace(" ", "");
         try {
             query = URLEncoder.encode(query, "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        //String url = "https://image.search.yahoo.co.jp/search?ei=UTF-8&dim=medium&p=" + query; // dim=large
         String url = "https://search.yahoo.co.jp/image/search?ei=UTF-8&p=" + query;
 
         requestData(url, Config.USER_AGENT_DESKTOP);

@@ -67,8 +67,8 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
         mContext = TeamActivity.this;
 
         Intent intent = getIntent();
-        String groupName = intent.getStringExtra("groupName");
-        mGroup = BaseApplication.getInstance().getGroup(groupName);
+        String groupId = intent.getStringExtra("groupId");
+        mGroup = BaseApplication.getInstance().getGroupById(groupId);
 
         initToolbar(mGroup.getName());
 
@@ -152,13 +152,13 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
 
             for (Member m : mMembers) {
                 for (Member o : oshiMembers) {
-                    if (m.getUrl().equals(o.getUrl())) {
+                    if (m.getProfileUrl().equals(o.getProfileUrl())) {
                         m.setOshimember(true);
                     }
                 }
             }
 
-            BaseApplication.getInstance().saveMember(mGroup.getName(), mMembers);
+            BaseApplication.getInstance().saveMember(mGroup.getId(), mMembers);
 
             //if (mIsRefreshMode) {
             //    refreshData();
@@ -204,16 +204,16 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
         if (response.isEmpty()) {
             Util.alert(mContext, getString(R.string.error), "response is empty.", null);
         } else {
-            if (mGroup.getName().equals("AKB48") || mGroup.getName().equals("SKE48") || mGroup.getName().equals("NMB48")) {
+            if (mGroup.getId().equals("akb48") || mGroup.getId().equals("ske48") || mGroup.getId().equals("nmb48")) {
                 BaseParser parser = null;
-                switch (mGroup.getName()) {
-                    case "AKB48":
+                switch (mGroup.getId()) {
+                    case "akb48":
                         parser = new Akb48Parser();
                         break;
-                    case "SKE48":
+                    case "ske48":
                         parser = new Ske48Parser();
                         break;
-                    case "NMB48":
+                    case "nmb48":
                         parser = new Nmb48Parser();
                         break;
                 }
@@ -227,19 +227,19 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
                     loadTeam();
                 }
             } else {
-                if (mGroup.getName().equals("HKT48")) {
+                if (mGroup.getId().equals("hkt48")) {
                     Hkt48Parser hkt48Parser = new Hkt48Parser();
                     hkt48Parser.parse(response, mGroup, mTeams, mMembers);
-                } else if (mGroup.getName().equals("NGT48")) {
+                } else if (mGroup.getId().equals("ngt48")) {
                     Ngt48Parser ngt48Parser = new Ngt48Parser();
                     ngt48Parser.parse(response, mGroup, mTeams, mMembers);
-                } else if (mGroup.getName().equals("STU48")) {
+                } else if (mGroup.getId().equals("stu48")) {
                     Stu48Parser stu48Parser = new Stu48Parser();
                     stu48Parser.parse(response, mGroup, mTeams, mMembers);
-                } else if (mGroup.getName().equals("乃木坂46")) {
+                } else if (mGroup.getId().equals("nogizaka46")) {
                     Nogizaka46Parser nogizaka46Parser = new Nogizaka46Parser();
                     nogizaka46Parser.parse(response, mGroup, mTeams, mMembers);
-                } else if (mGroup.getName().equals("欅坂46")) {
+                } else if (mGroup.getId().equals("keyakizaka46")) {
                     Keyakizaka46Parser keyakizaka46Parser = new Keyakizaka46Parser();
                     keyakizaka46Parser.parse(response, mGroup, mTeams, mMembers);
                 } else { // if (mGroup.getName().equals("SNH48")) {
@@ -298,7 +298,7 @@ public class TeamActivity extends BaseActivity implements TeamFragment.EventList
 
         @Override
         public Fragment getItem(int position) {
-            return TeamFragment.newInstance(position, mGroup.getName(), mTeams.get(position).getName(), mIsCacheMode);
+            return TeamFragment.newInstance(position, mGroup.getId(), mGroup.getName(), mTeams.get(position).getName(), mIsCacheMode);
         }
 
         @Override
