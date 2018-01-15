@@ -134,6 +134,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
 
         mOshiMembers = BaseApplication.getInstance().loadMember(Config.PREFERENCE_KEY_OSHIMEMBERS);
+        BaseApplication.getInstance().setmOshimembers(mOshiMembers);
     }
 
     @Override

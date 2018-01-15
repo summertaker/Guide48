@@ -21,6 +21,8 @@ import com.summertaker.guide48.util.Util;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected String mTag = "== " + getClass().getSimpleName();
+    protected String mVolleyTag = mTag;
+
     protected Context mContext;
     protected Resources mResources;
     //protected SharedPreferences mSharedPreferences;

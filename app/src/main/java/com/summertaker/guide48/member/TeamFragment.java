@@ -170,6 +170,7 @@ public class TeamFragment extends BaseFragment implements TeamInterface {
     @Override
     public void onStop() {
         super.onStop();
+
         BaseApplication.getInstance().cancelPendingRequests(mVolleyTag);
 
         ArrayList<Member> oshiMembers = BaseApplication.getInstance().getOshimembers();
