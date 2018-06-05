@@ -37,4 +37,5 @@
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_member">MemberActivity</string>
     <string name="title_activity_image_viewer">ImageViewerActivity</string>
+    <string name="title_activity_screen">ScreenActivity</string>
 </resources>

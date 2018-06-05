@@ -4,6 +4,102 @@
     <color name="colorPrimaryDark">#880E4F</color>
     <color name="colorAccent">#FF80AB</color>
 
+    <color name="button_text_default">#ffffff</color>
+    <color name="button_text_reverse">#000000</color>
+
+    <!-- Bootstrap Button -->
+    <color name="button_default">#e6e6e6</color>
+    <color name="button_default_border">#d6d6d6</color>
+    <color name="button_default_pressed">#c6c6c6</color>
+    <color name="button_default_pressed_border">#b6b6b6</color>
+
+    <color name="button_primary">#337AB7</color>
+    <color name="button_primary_border">#2E6DA4</color>
+    <color name="button_primary_pressed">#286090</color>
+    <color name="button_primary_pressed_border">#204D74</color>
+
+    <color name="button_success">#5CB85C</color>
+    <color name="button_success_border">#4CAE4C</color>
+    <color name="button_success_pressed">#449D44</color>
+    <color name="button_success_pressed_border">#398439</color>
+
+    <color name="button_info">#5BC0DE</color>
+    <color name="button_info_border">#46B8DA</color>
+    <color name="button_info_pressed">#31B0D5</color>
+    <color name="button_info_pressed_border">#269ABC</color>
+
+    <color name="button_warning">#F0AD4E</color>
+    <color name="button_warning_border">#EEA236</color>
+    <color name="button_warning_pressed">#EC971F</color>
+    <color name="button_warning_pressed_border">#D58512</color>
+
+    <color name="button_danger">#ed5565</color>
+    <color name="button_danger_border">#da4453</color>
+    <color name="button_danger_pressed">#da4453</color>
+    <color name="button_danger_pressed_border">#990000</color>
+
+    <color name="button_purple">#ba68c8</color>
+    <color name="button_purple_border">#ab47bc</color>
+    <color name="button_purple_pressed">#ab47bc</color>
+    <color name="button_purple_pressed_border">#9c27b0</color>
+
+    <color name="button_dark">#616161</color>
+    <color name="button_dark_border">#424242</color>
+    <color name="button_dark_pressed">#424242</color>
+    <color name="button_dark_pressed_border">#000000</color>
+
+    <!-- Color -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_gray">#606060</color>
+    <color name="dark_slate_gray">#294d4a</color>
+    <color name="slate_gray">#73828c</color>
+    <color name="light_slate_gray">#73869c</color>
+    <color name="gray">#808080</color>
+    <color name="gray_transparent">#66000000</color>
+    <color name="dark_gray">#A0A0A0</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="silver_transparent">#33000000</color>
+    <color name="light_gray">#d6d3d6</color>
+    <color name="gainsboro">#dedbde</color>
+    <color name="brown">#A52829</color>
+    <color name="sienna">#9C5129</color>
+    <color name="peru">#CE8639</color>
+    <color name="tan">#D6B28C</color>
+    <color name="moccasin">#FFE3B5</color>
+    <color name="yellow">#ffeb3b</color>
+    <color name="dark_green">#006500</color>
+    <color name="green">#008200</color>
+    <color name="forest_green">#218a21</color>
+    <color name="sea_green">#298a52</color>
+    <color name="medium_sea_green">#39b273</color>
+    <color name="lime_green">#31cf31</color>
+    <color name="dark_sea_green">#8cba8c</color>
+    <color name="light_green">#8cef8c</color>
+
+    <color name="steel_blue">#4282b5</color>
+    <color name="blue">#337AB7</color>
+    <color name="royal_blue">#4169E1</color>
+    <color name="con_flower_blue">#6495ED</color>
+    <color name="sky_blue">#84CFEF</color>
+    <color name="light_steel_blue">#adc3de</color>
+    <color name="light_sky">#B6E5F6</color>
+    <color name="light_blue">#ADD7E7</color>
+    <color name="lavender">#E7E7FF</color>
+
+    <color name="dark_red">#8c0000</color>
+    <color name="fire_brick">#b52021</color>
+    <color name="crimson">#de1439</color>
+    <color name="indian_red">#ce5d5a</color>
+    <color name="red">#ff0000</color>
+    <color name="light_coral">#ef8284</color>
+    <color name="salmon">#ff8273</color>
+    <color name="light_salmon">#ff9e7b</color>
+
+    <color name="pink">#FFBECE</color>
+    <color name="light_pink">#FFD9E3</color>
+
     <!-- Card -->
     <color name="card_background">#e1e1e1</color>
     <color name="card_normal_background">#00000000</color>

@@ -112,6 +112,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     void start() {
+        Intent intent = new Intent(this, ScreenService.class);
+        startService(intent);
+
         mViewPager.setVisibility(View.VISIBLE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
